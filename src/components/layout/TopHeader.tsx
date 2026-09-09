@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
-import { Bell, Sparkles, User, ChevronDown } from 'lucide-react';
+import { Bell, User, ChevronDown, Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { NotificationPanel } from './NotificationPanel';
 import { ProfileDropdown } from './ProfileDropdown';
 
 interface TopHeaderProps {
   onToggleCopilot: () => void;
+  isSidebarOpen?: boolean;
+  onToggleSidebar?: () => void;
 }
 
-export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCopilot }) => {
+export const TopHeader: React.FC<TopHeaderProps> = ({ 
+  onToggleCopilot,
+  isSidebarOpen,
+  onToggleSidebar
+}) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-20 shadow-2xs">
-      {/* Left Brand Title with Logo & Navbar Name Image */}
-      <Link to="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-  
-        <div className="h-7 w-[1px] bg-slate-200" />
-        <img
-          src="/images/name for navbar.png"
-          alt="NIRVANA - National Intelligence & Risk Visualization"
-          className="h-9 w-auto object-contain shrink-0"
-        />
-      </Link>
+      {/* Left Brand Title & Toggle Button */}
+      <div className="flex items-center gap-3 min-w-0">
+
+        <Link to="/dashboard" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity min-w-0">
+
+          <div className="h-5 w-[1px] bg-slate-200 shrink-0" />
+          <img
+            src="/images/name for navbar.png"
+            alt="NIRVANA - National Intelligence & Risk Visualization"
+            className="h-7 w-auto object-contain shrink-0 max-w-[200px]"
+          />
+        </Link>
+      </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 shrink-0">
         {/* Notification Bell Button */}
         <div className="relative">
           <button

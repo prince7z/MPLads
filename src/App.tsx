@@ -14,16 +14,28 @@ import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => {
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Default CLOSED as requested
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex font-sans text-slate-800 antialiased">
-      {/* Fixed Left Sidebar (~250px) */}
-      <Sidebar />
+      {/* Collapsible Left Sidebar (Default closed) */}
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)} 
+      />
 
       {/* Main Viewport Container */}
-      <div className="flex-1 pl-[250px] flex flex-col min-w-0">
+      <div 
+        className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out ${
+          isSidebarOpen ? 'pl-[240px]' : 'pl-[68px]'
+        }`}
+      >
         {/* Sticky Top Header */}
-        <TopHeader onToggleCopilot={() => setIsCopilotOpen(!isCopilotOpen)} />
+        <TopHeader 
+          onToggleCopilot={() => setIsCopilotOpen(!isCopilotOpen)} 
+          isSidebarOpen={isSidebarOpen}
+          onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+        />
 
         {/* Dynamic Route Content */}
         <main className="flex-1 p-6 max-w-[1600px] w-full mx-auto">
@@ -49,4 +61,5 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
 export default App;
