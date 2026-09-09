@@ -67,7 +67,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             <div className="flex items-center justify-between w-full px-1">
               <img
                 src="/images/logo.png"
-                alt="NIRVANA Logo"
+                alt="eSanchayan Logo"
                 className="w-8 h-8 object-contain shrink-0"
                 title="Click to expand menu"
               />

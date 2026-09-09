@@ -76,7 +76,7 @@ export const DashboardOverviewPage: React.FC = () => {
       {/* Bottom Footer */}
       <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-medium">
         <div>Last Updated: 01 May 2026 10:30 AM</div>
-        <div>Source: <span className="font-bold text-navy-900">NIRVANA MoSPI Platform</span></div>
+        <div>Source: <span className="font-bold text-navy-900">eSanchayan MoSPI Platform</span></div>
       </div>
     </div>
   );

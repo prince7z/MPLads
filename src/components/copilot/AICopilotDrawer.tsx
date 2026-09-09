@@ -150,7 +150,7 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-navy-900">NIRVANA AI Copilot</h2>
+            <h2 className="text-sm font-bold text-navy-900">eSanchayan AI Copilot</h2>
             <p className="text-[10px] text-slate-500 font-medium">National Intelligence & Decision Support</p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
                   <div className="w-5 h-5 rounded-full bg-navy-900 flex items-center justify-center text-amber-400">
                     <Bot className="w-3 h-3" />
                   </div>
-                  <span className="text-[11px] font-bold text-navy-900">NIRVANA AI</span>
+                  <span className="text-[11px] font-bold text-navy-900">eSanchayan AI</span>
                   <span className="text-[10px] text-slate-400">{m.timestamp}</span>
                 </>
               )}

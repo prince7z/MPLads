@@ -12,7 +12,7 @@ export const EmblemLogo: React.FC<{ size?: 'sm' | 'md' | 'lg'; darkTheme?: boole
       {/* Emblem Logo */}
       <img
         src="/images/Branding.png"
-        alt="NIRVANA Logo"
+        alt="eSanchayan Logo"
         className={`${iconSizes[size]} w-auto object-contain shrink-0 drop-shadow-xs`}
       />
 
