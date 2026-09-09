@@ -1,149 +1,290 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 import { STATE_RISK_LIST } from '../../data/dashboardData';
+import { Search, MapPin, Layers, RefreshCw } from 'lucide-react';
 
 interface IndiaRiskMapProps {
   onSelectState?: (stateName: string) => void;
 }
 
+// Complete list of Indian States and UTs with accurate Lat/Lng coordinates
+const INDIA_LOCATIONS = [
+  { id: 'BR', name: 'Bihar', lat: 25.0961, lng: 85.3131, risk: 72, highRisk: 142, delayed: 89, sanctioned: '₹ 840 Cr', status: 'Critical' },
+  { id: 'UP', name: 'Uttar Pradesh', lat: 26.8467, lng: 80.9462, risk: 68, highRisk: 198, delayed: 124, sanctioned: '₹ 1,420 Cr', status: 'High' },
+  { id: 'WB', name: 'West Bengal', lat: 22.9868, lng: 87.8550, risk: 63, highRisk: 94, delayed: 61, sanctioned: '₹ 610 Cr', status: 'High' },
+  { id: 'JH', name: 'Jharkhand', lat: 23.6102, lng: 85.2799, risk: 58, highRisk: 56, delayed: 38, sanctioned: '₹ 410 Cr', status: 'High' },
+  { id: 'MP', name: 'Madhya Pradesh', lat: 22.9734, lng: 78.6569, risk: 54, highRisk: 82, delayed: 45, sanctioned: '₹ 730 Cr', status: 'High' },
+  { id: 'RJ', name: 'Rajasthan', lat: 27.0238, lng: 74.2179, risk: 48, highRisk: 65, delayed: 39, sanctioned: '₹ 680 Cr', status: 'Medium' },
+  { id: 'OD', name: 'Odisha', lat: 20.9517, lng: 85.0985, risk: 45, highRisk: 49, delayed: 27, sanctioned: '₹ 520 Cr', status: 'Medium' },
+  { id: 'MH', name: 'Maharashtra', lat: 19.7515, lng: 75.7139, risk: 41, highRisk: 78, delayed: 34, sanctioned: '₹ 1,150 Cr', status: 'Medium' },
+  { id: 'KA', name: 'Karnataka', lat: 15.3173, lng: 75.7139, risk: 35, highRisk: 38, delayed: 19, sanctioned: '₹ 590 Cr', status: 'Medium' },
+  { id: 'TN', name: 'Tamil Nadu', lat: 11.1271, lng: 78.6569, risk: 28, highRisk: 24, delayed: 11, sanctioned: '₹ 620 Cr', status: 'Low' },
+  { id: 'GJ', name: 'Gujarat', lat: 22.2587, lng: 71.1924, risk: 24, highRisk: 18, delayed: 8, sanctioned: '₹ 710 Cr', status: 'Low' },
+  { id: 'KL', name: 'Kerala', lat: 10.8505, lng: 76.2711, risk: 22, highRisk: 12, delayed: 5, sanctioned: '₹ 380 Cr', status: 'Low' },
+  { id: 'JK', name: 'Jammu & Kashmir', lat: 33.7782, lng: 76.5762, risk: 38, highRisk: 29, delayed: 14, sanctioned: '₹ 320 Cr', status: 'Medium' },
+  { id: 'LA', name: 'Ladakh', lat: 34.1526, lng: 77.5771, risk: 30, highRisk: 9, delayed: 4, sanctioned: '₹ 180 Cr', status: 'Low' },
+  { id: 'HP', name: 'Himachal Pradesh', lat: 31.1048, lng: 77.1734, risk: 29, highRisk: 14, delayed: 7, sanctioned: '₹ 290 Cr', status: 'Low' },
+  { id: 'PB', name: 'Punjab', lat: 31.1471, lng: 75.3412, risk: 34, highRisk: 22, delayed: 10, sanctioned: '₹ 410 Cr', status: 'Medium' },
+  { id: 'UT', name: 'Uttarakhand', lat: 30.0668, lng: 79.0193, risk: 42, highRisk: 31, delayed: 16, sanctioned: '₹ 340 Cr', status: 'Medium' },
+  { id: 'HR', name: 'Haryana', lat: 29.0588, lng: 76.0856, risk: 45, highRisk: 37, delayed: 18, sanctioned: '₹ 450 Cr', status: 'Medium' },
+  { id: 'DL', name: 'Delhi (NCT)', lat: 28.7041, lng: 77.1025, risk: 40, highRisk: 26, delayed: 12, sanctioned: '₹ 280 Cr', status: 'Medium' },
+  { id: 'CT', name: 'Chhattisgarh', lat: 21.2787, lng: 81.8661, risk: 51, highRisk: 43, delayed: 22, sanctioned: '₹ 390 Cr', status: 'High' },
+  { id: 'GA', name: 'Goa', lat: 15.2993, lng: 74.1240, risk: 18, highRisk: 4, delayed: 1, sanctioned: '₹ 120 Cr', status: 'Low' },
+  { id: 'TS', name: 'Telangana', lat: 18.1124, lng: 79.0193, risk: 36, highRisk: 28, delayed: 13, sanctioned: '₹ 480 Cr', status: 'Medium' },
+  { id: 'AP', name: 'Andhra Pradesh', lat: 15.9129, lng: 79.7400, risk: 39, highRisk: 33, delayed: 16, sanctioned: '₹ 560 Cr', status: 'Medium' },
+  { id: 'AS', name: 'Assam', lat: 26.2006, lng: 92.9376, risk: 44, highRisk: 35, delayed: 19, sanctioned: '₹ 420 Cr', status: 'Medium' },
+  { id: 'SK', name: 'Sikkim', lat: 27.5330, lng: 88.5122, risk: 25, highRisk: 6, delayed: 2, sanctioned: '₹ 95 Cr', status: 'Low' },
+  { id: 'ML', name: 'Meghalaya', lat: 25.4670, lng: 91.3662, risk: 33, highRisk: 11, delayed: 5, sanctioned: '₹ 150 Cr', status: 'Medium' },
+  { id: 'TR', name: 'Tripura', lat: 23.9408, lng: 91.9882, risk: 27, highRisk: 8, delayed: 3, sanctioned: '₹ 130 Cr', status: 'Low' },
+  { id: 'MZ', name: 'Mizoram', lat: 23.1645, lng: 92.9376, risk: 31, highRisk: 7, delayed: 4, sanctioned: '₹ 110 Cr', status: 'Medium' },
+  { id: 'MN', name: 'Manipur', lat: 24.6637, lng: 93.9063, risk: 46, highRisk: 21, delayed: 11, sanctioned: '₹ 160 Cr', status: 'Medium' },
+  { id: 'NL', name: 'Nagaland', lat: 26.1584, lng: 94.5624, risk: 37, highRisk: 13, delayed: 6, sanctioned: '₹ 140 Cr', status: 'Medium' },
+  { id: 'AR', name: 'Arunachal Pradesh', lat: 28.2180, lng: 94.7278, risk: 29, highRisk: 10, delayed: 4, sanctioned: '₹ 190 Cr', status: 'Low' }
+];
+
 export const IndiaRiskMap: React.FC<IndiaRiskMapProps> = ({ onSelectState }) => {
-  const [hoveredState, setHoveredState] = useState<{
-    name: string;
-    riskIndex: number;
-    highRiskProjects: number;
-    delayedProjects: number;
-    status: string;
-    x: number;
-    y: number;
-  } | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+  const markersRef = useRef<{ [key: string]: L.Marker }>({});
 
-  // Map state ID to color
-  const getStateColor = (riskIndex: number) => {
-    if (riskIndex >= 70) return '#D92D20'; // Critical Red
-    if (riskIndex >= 50) return '#F79009'; // High Orange
-    if (riskIndex >= 30) return '#EAAA08'; // Medium Yellow
-    return '#12B76A'; // Low Green
+  const [selectedState, setSelectedState] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [tileStyle, setTileStyle] = useState<'voyager' | 'dark' | 'osm'>('voyager');
+
+  const tileUrls = {
+    voyager: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   };
 
-  // Simplified SVG paths representing major Indian states with clean geometry
-  const statePaths = [
-    // Jammu & Kashmir / Ladakh
-    { id: 'JK', name: 'Jammu & Kashmir', d: 'M 180,30 L 220,15 L 260,35 L 250,75 L 200,85 L 175,60 Z', risk: 38 },
-    { id: 'HP', name: 'Himachal Pradesh', d: 'M 220,80 L 250,75 L 260,100 L 230,110 Z', risk: 29 },
-    { id: 'PB', name: 'Punjab', d: 'M 180,85 L 220,80 L 225,115 L 185,110 Z', risk: 34 },
-    { id: 'UT', name: 'Uttarakhand', d: 'M 255,85 L 285,95 L 270,125 L 245,115 Z', risk: 42 },
-    { id: 'HR', name: 'Haryana', d: 'M 200,115 L 235,112 L 230,145 L 195,140 Z', risk: 45 },
-    { id: 'RJ', name: 'Rajasthan', d: 'M 110,130 L 195,120 L 210,195 L 155,225 L 105,185 Z', risk: 48 },
-    { id: 'UP', name: 'Uttar Pradesh', d: 'M 235,120 L 335,135 L 345,190 L 280,205 L 230,160 Z', risk: 68 },
-    { id: 'BR', name: 'Bihar', d: 'M 345,145 L 415,150 L 410,190 L 345,185 Z', risk: 72 },
-    { id: 'WB', name: 'West Bengal', d: 'M 410,190 L 440,195 L 435,275 L 415,280 L 405,230 L 390,200 Z', risk: 63 },
-    { id: 'JH', name: 'Jharkhand', d: 'M 345,190 L 405,190 L 395,240 L 340,230 Z', risk: 58 },
-    { id: 'OD', name: 'Odisha', d: 'M 325,235 L 395,240 L 375,310 L 315,280 Z', risk: 45 },
-    { id: 'MP', name: 'Madhya Pradesh', d: 'M 185,195 L 290,195 L 310,245 L 240,270 L 175,235 Z', risk: 54 },
-    { id: 'GJ', name: 'Gujarat', d: 'M 75,195 L 150,215 L 140,270 L 70,250 L 65,215 Z', risk: 24 },
-    { id: 'MH', name: 'Maharashtra', d: 'M 145,260 L 250,265 L 265,335 L 165,345 L 140,290 Z', risk: 41 },
-    { id: 'CT', name: 'Chhattisgarh', d: 'M 290,205 L 340,210 L 330,285 L 295,280 Z', risk: 51 },
-    { id: 'TS', name: 'Telangana', d: 'M 235,320 L 295,310 L 290,360 L 230,355 Z', risk: 36 },
-    { id: 'AP', name: 'Andhra Pradesh', d: 'M 235,360 L 310,345 L 275,430 L 230,400 Z', risk: 39 },
-    { id: 'KA', name: 'Karnataka', d: 'M 165,345 L 230,355 L 225,445 L 175,430 Z', risk: 35 },
-    { id: 'TN', name: 'Tamil Nadu', d: 'M 205,440 L 250,435 L 235,510 L 195,490 Z', risk: 28 },
-    { id: 'KL', name: 'Kerala', d: 'M 180,440 L 205,440 L 195,505 L 180,490 Z', risk: 22 },
-    { id: 'NE', name: 'Northeast States', d: 'M 445,150 L 515,140 L 525,200 L 450,190 Z', risk: 44 }
-  ];
+  // Initialize Leaflet Map
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
 
-  const handleMouseEnter = (stateItem: any, e: React.MouseEvent) => {
-    const data = STATE_RISK_LIST.find((s) => s.state === stateItem.name) || {
-      state: stateItem.name,
-      riskIndex: stateItem.risk,
-      highRiskProjects: Math.floor(stateItem.risk * 1.5),
-      delayedProjects: Math.floor(stateItem.risk * 0.9),
-      status: stateItem.risk >= 70 ? 'Critical' : stateItem.risk >= 50 ? 'High' : stateItem.risk >= 30 ? 'Medium' : 'Low'
-    };
+    // Create Map Instance if not already created
+    if (!mapInstanceRef.current) {
+      const map = L.map(mapContainerRef.current, {
+        center: [22.5937, 78.9629],
+        zoom: 4.6,
+        minZoom: 4,
+        maxZoom: 9,
+        zoomControl: false,
+        attributionControl: false
+      });
 
-    setHoveredState({
-      name: data.state,
-      riskIndex: data.riskIndex,
-      highRiskProjects: data.highRiskProjects,
-      delayedProjects: data.delayedProjects,
-      status: data.status,
-      x: e.clientX,
-      y: e.clientY
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      mapInstanceRef.current = map;
+    }
+
+    const map = mapInstanceRef.current;
+
+    // Remove existing tile layers and set new tile layer
+    map.eachLayer((layer) => {
+      if (layer instanceof L.TileLayer) {
+        map.removeLayer(layer);
+      }
     });
+
+    L.tileLayer(tileUrls[tileStyle], {
+      maxZoom: 18,
+      subdomains: 'abcd'
+    }).addTo(map);
+
+    // Clear existing markers
+    Object.values(markersRef.current).forEach((marker) => marker.remove());
+    markersRef.current = {};
+
+    // Render Pin Markers for every location
+    INDIA_LOCATIONS.forEach((loc) => {
+      const getBadgeBg = (risk: number) => {
+        if (risk >= 70) return '#D92D20'; // Critical Red
+        if (risk >= 50) return '#F79009'; // High Orange
+        if (risk >= 30) return '#EAAA08'; // Medium Yellow
+        return '#12B76A';                // Low Green
+      };
+
+      const color = getBadgeBg(loc.risk);
+      const isCritical = loc.risk >= 70;
+
+      // Custom Leaflet DivIcon
+      const iconHtml = `
+        <div class="relative flex items-center justify-center group">
+          ${isCritical ? `<div class="absolute w-8 h-8 rounded-full animate-ping opacity-40" style="background-color: ${color}"></div>` : ''}
+          <div class="w-7 h-7 rounded-full shadow-lg flex items-center justify-center text-white text-[10px] font-black border-2 border-white cursor-pointer transition-transform hover:scale-125" style="background-color: ${color}">
+            ${loc.risk}
+          </div>
+          <div class="absolute -bottom-4 whitespace-nowrap bg-slate-900/90 text-white text-[9px] font-bold px-1.5 py-0.2 rounded shadow-xs pointer-events-none">
+            ${loc.id}
+          </div>
+        </div>
+      `;
+
+      const customIcon = L.divIcon({
+        html: iconHtml,
+        className: 'leaflet-data-marker',
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+
+      const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(map);
+
+      // Popup html
+      const popupHtml = `
+        <div class="p-1 max-w-[200px] text-slate-800 font-sans">
+          <div class="flex items-center justify-between border-b pb-1 mb-1.5">
+            <span class="font-extrabold text-xs text-navy-900">${loc.name}</span>
+            <span class="text-[9px] font-black px-1.5 py-0.5 rounded text-white" style="background-color: ${color}">
+              ${loc.status}
+            </span>
+          </div>
+          <div class="text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-500 font-medium">Risk Score:</span> <span class="font-bold">${loc.risk}/100</span></div>
+            <div class="flex justify-between"><span class="text-slate-500 font-medium">High Risk Works:</span> <span class="font-bold text-amber-600">${loc.highRisk}</span></div>
+            <div class="flex justify-between"><span class="text-slate-500 font-medium">Delayed Works:</span> <span class="font-bold text-red-600">${loc.delayed}</span></div>
+            <div class="flex justify-between"><span class="text-slate-500 font-medium">Sanctioned:</span> <span class="font-bold text-slate-700">${loc.sanctioned}</span></div>
+          </div>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml, { offset: [0, -10] });
+
+      marker.on('click', () => {
+        setSelectedState(loc.name);
+        if (onSelectState) onSelectState(loc.name);
+      });
+
+      markersRef.current[loc.name] = marker;
+    });
+
+    // Invalidate map size after rendering
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+
+    return () => {
+      // Cleanup on unmount
+    };
+  }, [tileStyle]);
+
+  // Handle Search state jump
+  const handleSelectFromDropdown = (stateName: string) => {
+    setSelectedState(stateName);
+    const loc = INDIA_LOCATIONS.find((l) => l.name.toLowerCase() === stateName.toLowerCase());
+    if (loc && mapInstanceRef.current) {
+      mapInstanceRef.current.flyTo([loc.lat, loc.lng], 6.5, { duration: 1.2 });
+      const marker = markersRef.current[loc.name];
+      if (marker) marker.openPopup();
+    }
+    if (onSelectState) onSelectState(stateName);
   };
+
+  const handleResetMap = () => {
+    setSelectedState(null);
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.flyTo([22.5937, 78.9629], 4.6, { duration: 1 });
+    }
+  };
+
+  const filteredLocations = INDIA_LOCATIONS.filter((l) =>
+    l.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div className="relative w-full h-[320px] flex items-center justify-center bg-slate-50/50 rounded border border-slate-100 p-2">
-      {/* Map SVG */}
-      <svg viewBox="0 0 550 540" className="w-full h-full max-h-[300px]">
-        {statePaths.map((state) => {
-          const color = getStateColor(state.risk);
-          return (
-            <path
-              key={state.id}
-              d={state.d}
-              fill={color}
-              stroke="#FFFFFF"
-              strokeWidth="1.5"
-              className="cursor-pointer transition-all duration-150 hover:opacity-85 hover:stroke-slate-900 hover:stroke-2"
-              onMouseEnter={(e) => handleMouseEnter(state, e)}
-              onMouseLeave={() => setHoveredState(null)}
-              onClick={() => onSelectState && onSelectState(state.name)}
-            />
-          );
-        })}
-      </svg>
+    <div className="flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
+      {/* Map Control Header */}
+      <div className="px-3.5 py-2.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div className="flex items-center gap-2">
+          <div className="p-1 bg-navy-900 text-amber-400 rounded">
+            <MapPin className="w-3.5 h-3.5" />
+          </div>
+          <div>
+            <h3 className="font-bold text-navy-900 leading-tight">Interactive Map of India</h3>
+            <p className="text-[10px] text-slate-500">Live Spatial Risk & Project Analytics</p>
+          </div>
+        </div>
 
-      {/* Map Legend */}
-      <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs border border-slate-200 p-2 rounded text-[10px] space-y-1 shadow-2xs">
-        <div className="font-bold text-slate-700 border-b border-slate-100 pb-0.5">Risk Level</div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-xs bg-[#D92D20]" />
-          <span>Critical (71–100)</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-xs bg-[#F79009]" />
-          <span>High (51–70)</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-xs bg-[#EAAA08]" />
-          <span>Medium (31–50)</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-xs bg-[#12B76A]" />
-          <span>Low (0–30)</span>
+        {/* State Jump Search & Layer Controls */}
+        <div className="flex items-center gap-2">
+          {/* State Search Dropdown */}
+          <div className="relative">
+            <select
+              value={selectedState || ''}
+              onChange={(e) => handleSelectFromDropdown(e.target.value)}
+              className="text-[11px] font-semibold border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none focus:border-navy-900"
+            >
+              <option value="">Search & Select State...</option>
+              {INDIA_LOCATIONS.map((loc) => (
+                <option key={loc.id} value={loc.name}>
+                  {loc.name} (Risk: {loc.risk})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Map Style Selector */}
+          <div className="flex items-center border border-slate-300 rounded bg-white overflow-hidden p-0.5 text-[10px] font-bold">
+            <button
+              onClick={() => setTileStyle('voyager')}
+              className={`px-2 py-0.5 rounded ${tileStyle === 'voyager' ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+            >
+              Voyager
+            </button>
+            <button
+              onClick={() => setTileStyle('dark')}
+              className={`px-2 py-0.5 rounded ${tileStyle === 'dark' ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+            >
+              Dark
+            </button>
+            <button
+              onClick={() => setTileStyle('osm')}
+              className={`px-2 py-0.5 rounded ${tileStyle === 'osm' ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+            >
+              OSM
+            </button>
+          </div>
+
+          {/* Reset Map Center */}
+          <button
+            onClick={handleResetMap}
+            title="Reset Map View"
+            className="p-1 border border-slate-300 rounded bg-white text-slate-600 hover:bg-slate-100 transition-colors"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
 
-      {/* Floating Hover Tooltip */}
-      {hoveredState && (
-        <div
-          className="fixed z-50 pointer-events-none bg-navy-900 text-white p-2.5 rounded-md shadow-xl text-xs space-y-1 border border-slate-700 min-w-[150px]"
-          style={{
-            left: `${hoveredState.x + 12}px`,
-            top: `${hoveredState.y - 40}px`
-          }}
-        >
-          <div className="font-bold text-amber-400 border-b border-slate-700 pb-1 flex justify-between items-center">
-            <span>{hoveredState.name}</span>
-            <span className="text-[10px] bg-red-600 px-1 py-0.2 rounded text-white font-extrabold uppercase">
-              {hoveredState.status}
-            </span>
+      {/* Leaflet Canvas Container */}
+      <div className="relative flex-1 min-h-[300px] w-full bg-slate-100">
+        <div ref={mapContainerRef} className="w-full h-full min-h-[300px] z-10" />
+
+        {/* Legend Box */}
+        <div className="absolute bottom-3 left-3 z-20 bg-white/95 backdrop-blur-xs border border-slate-200 p-2 rounded-lg text-[10px] space-y-1 shadow-md">
+          <div className="font-extrabold text-navy-900 border-b border-slate-100 pb-1 flex items-center justify-between gap-3">
+            <span>Risk Score Legend</span>
+            <span className="text-[9px] bg-slate-100 px-1 py-0.2 rounded text-slate-500">28 States / 8 UTs</span>
           </div>
-          <div className="text-[11px] space-y-0.5 pt-0.5">
-            <div className="flex justify-between">
-              <span className="text-slate-300">Risk Index:</span>
-              <span className="font-bold">{hoveredState.riskIndex} / 100</span>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1 font-semibold text-slate-700">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#D92D20]" />
+              <span>Critical (&ge;70)</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-slate-300">High Risk Works:</span>
-              <span className="font-bold text-amber-300">{hoveredState.highRiskProjects}</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F79009]" />
+              <span>High (50–69)</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-slate-300">Delayed Works:</span>
-              <span className="font-bold text-red-300">{hoveredState.delayedProjects}</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#EAAA08]" />
+              <span>Medium (30–49)</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#12B76A]" />
+              <span>Low (&lt;30)</span>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

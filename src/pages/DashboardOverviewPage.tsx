@@ -12,25 +12,29 @@ export const DashboardOverviewPage: React.FC = () => {
   const [financialYear, setFinancialYear] = useState('2024-25');
 
   return (
-    <div className="space-y-5 pb-8">
+    <div className="space-y-6 pb-8 select-none">
       {/* Dashboard Title Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
         <div>
-          <h1 className="text-xl font-extrabold text-navy-900 tracking-tight">
-            National MPLADS Intelligence Dashboard
+          <h1 className="text-xl font-extrabold text-navy-900 tracking-tight flex flex-wrap items-center gap-2">
+            <span>NIRVANA</span>
+            <span className="text-slate-300 font-normal">—</span>
+            <span className="text-base font-semibold text-slate-700">
+              National Intelligence & Risk Visualization for Administrative Network & Assets
+            </span>
           </h1>
-          <p className="text-xs text-slate-500 font-medium mt-0.5">
-            AI-powered monitoring of funds, projects, risks and implementation
+          <p className="text-xs text-slate-500 font-medium mt-1">
+            Real-time spatial risk intelligence, financial tracking, and predictive monitoring across administrative networks
           </p>
         </div>
 
-        <div className="flex items-center gap-3 self-start sm:self-auto">
+        <div className="flex items-center gap-3 self-start sm:self-auto shrink-0">
           <div className="flex items-center gap-2 text-xs">
             <span className="font-semibold text-slate-500">Financial Year</span>
             <select
               value={financialYear}
               onChange={(e) => setFinancialYear(e.target.value)}
-              className="border border-slate-300 rounded px-2.5 py-1 bg-white font-bold text-slate-800 focus:border-navy-900 focus:outline-none"
+              className="border border-slate-300 rounded-md px-3 py-1.5 bg-white font-bold text-slate-800 focus:border-navy-900 focus:outline-none shadow-2xs"
             >
               <option value="2024-25">2024-25</option>
               <option value="2023-24">2023-24</option>
@@ -47,42 +51,52 @@ export const DashboardOverviewPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Main Analytics Section - 3 Columns (Fund Progress | Risk Donut | AI Early Warnings) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <div className="lg:col-span-6 h-[340px]">
-          <FundProgressChart />
-        </div>
-        <div className="lg:col-span-3 h-[340px]">
-          <RiskDonutChart />
-        </div>
-        <div className="lg:col-span-3 h-[340px]">
-          <EarlyWarningsPanel />
-        </div>
-      </div>
-
-      {/* Bottom Intelligence Section - 2 Panels (State-wise Map & Top 5 States | AI Insights) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* State-wise Risk Intelligence */}
-        <div className="lg:col-span-7 bg-white border border-slate-200 rounded-lg p-4 flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-bold text-navy-900 flex items-center gap-1.5">
-              State-wise Risk Intelligence
-              <span className="text-[10px] font-semibold text-slate-400 cursor-help" title="Interactive spatial risk visualization across Indian states">ⓘ</span>
-            </h3>
+      {/* Primary Analytics Section - Map (Statewise Detail) Moved UP Side-by-Side with Main Graphs */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Left Column: Authentic Interactive Map of India & Top States Table (Moved UP) */}
+        <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between shadow-xs">
+          <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+            <div>
+              <h3 className="text-sm font-extrabold text-navy-900 flex items-center gap-2">
+                <span>State-wise Risk Intelligence & GIS Spatial Map</span>
+                <span className="text-[10px] font-bold bg-navy-900 text-amber-400 px-2 py-0.5 rounded">
+                  Live Geospatial
+                </span>
+              </h3>
+              <p className="text-[11px] text-slate-500">Interactive OpenStreetMap view of Indian states & risk metrics</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-            <div className="md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch flex-1">
+            <div className="md:col-span-7 min-h-[320px]">
               <IndiaRiskMap />
             </div>
-            <div className="md:col-span-5 border-l border-slate-100 pl-3 h-full">
+            <div className="md:col-span-5 border-l border-slate-100 pl-3 flex flex-col justify-between">
               <TopStatesTable />
             </div>
           </div>
         </div>
 
-        {/* AI Generated Insights */}
-        <div className="lg:col-span-5">
+        {/* Right Column: Graphs (Fund Progress Chart & Risk Donut Chart) */}
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="h-[210px]">
+            <FundProgressChart />
+          </div>
+          <div className="h-[200px]">
+            <RiskDonutChart />
+          </div>
+        </div>
+      </div>
+
+      {/* AI Dropdown Intelligence Section (Alerts & AI Insights Panels as Dropdowns) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* AI Early Warnings Panel (Dropdown Filter & Accordions) */}
+        <div className="lg:col-span-6">
+          <EarlyWarningsPanel />
+        </div>
+
+        {/* AI Generated Insights Panel (Dropdown Topics & Accordions) */}
+        <div className="lg:col-span-6">
           <AIInsightsPanel />
         </div>
       </div>
@@ -90,7 +104,7 @@ export const DashboardOverviewPage: React.FC = () => {
       {/* Bottom Footer */}
       <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-medium">
         <div>Last Updated: 01 May 2026 10:30 AM</div>
-        <div>Source: <span className="font-bold text-navy-900">MPLADS DigiGov Portal</span></div>
+        <div>Source: <span className="font-bold text-navy-900">NIRVANA MoSPI Platform</span></div>
       </div>
     </div>
   );

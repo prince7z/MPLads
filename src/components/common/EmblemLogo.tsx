@@ -21,14 +21,14 @@ export const EmblemLogo: React.FC<{ size?: 'sm' | 'md' | 'lg' }> = ({ size = 'md
         </svg>
       </div>
       <div>
-        <div className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 leading-tight">
-          Government of India
+        <div className="text-[11px] uppercase tracking-wider font-bold text-amber-700 leading-tight">
+          NIRVANA Platform
         </div>
-        <div className="text-[10px] text-slate-600 font-medium leading-tight max-w-[170px]">
-          Ministry of Statistics and Programme Implementation
+        <div className="text-[10px] text-slate-700 font-semibold leading-tight max-w-[170px]">
+          Government of India • MoSPI
         </div>
-        <div className="text-[9px] text-slate-400 leading-none mt-0.5 font-sans">
-          MPLADS Scheme
+        <div className="text-[8.5px] text-slate-500 font-medium leading-tight mt-0.5" title="National Intelligence & Risk Visualization for Administrative Network & Assets">
+          National Intelligence & Risk Visualization
         </div>
       </div>
     </div>

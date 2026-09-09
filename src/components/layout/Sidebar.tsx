@@ -2,13 +2,11 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  BarChart3, 
   ShieldAlert, 
   FolderKanban, 
   IndianRupee, 
   ClipboardCheck, 
   FileText, 
-  Download, 
   HelpCircle, 
   Settings 
 } from 'lucide-react';
@@ -19,21 +17,19 @@ export const Sidebar: React.FC = () => {
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Overview', path: '/dashboard', icon: BarChart3 },
     { name: 'Risk Intelligence', path: '/risk-intelligence', icon: ShieldAlert },
     { name: 'Projects', path: '/projects', icon: FolderKanban },
     { name: 'Financials', path: '/financials', icon: IndianRupee },
     { name: 'Compliance', path: '/compliance', icon: ClipboardCheck },
     { name: 'Reports', path: '/reports', icon: FileText },
-    { name: 'Data Downloads', path: '/downloads', icon: Download },
     { name: 'Help & Support', path: '/help', icon: HelpCircle },
   ];
 
   return (
-    <aside className="w-[250px] bg-white border-r border-slate-200 flex flex-col justify-between h-screen fixed left-0 top-0 z-30 select-none">
+    <aside className="w-[250px] bg-white border-r border-slate-200 flex flex-col justify-between h-screen fixed left-0 top-0 z-30 select-none shadow-xs">
       <div>
         {/* Emblem & Department Header */}
-        <div className="p-4 border-b border-slate-200 bg-slate-50/50">
+        <div className="p-4 border-b border-slate-200 bg-slate-50/70">
           <EmblemLogo size="md" />
         </div>
 
@@ -42,7 +38,6 @@ export const Sidebar: React.FC = () => {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path || 
-              (item.name === 'Overview' && location.pathname === '/dashboard') ||
               (item.name === 'Projects' && location.pathname.startsWith('/projects'));
 
             return (

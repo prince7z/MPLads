@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X, Sparkles, Send, Bot, User, ArrowRight, HelpCircle } from 'lucide-react';
 
 interface AICopilotDrawerProps {
@@ -18,6 +18,8 @@ interface Message {
 
 export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClose }) => {
   const [input, setInput] = useState('');
+  const chatBottomRef = useRef<HTMLDivElement>(null);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -47,6 +49,17 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
       ]
     }
   ]);
+
+  // Smooth scroll to bottom on new message or drawer opening
+  const scrollToBottom = () => {
+    chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [messages, isOpen]);
 
   if (!isOpen) return null;
 
@@ -137,8 +150,8 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-navy-900">AI Copilot</h2>
-            <p className="text-[10px] text-slate-500 font-medium">MPLADS Decision Support System</p>
+            <h2 className="text-sm font-bold text-navy-900">NIRVANA AI Copilot</h2>
+            <p className="text-[10px] text-slate-500 font-medium">National Intelligence & Decision Support</p>
           </div>
         </div>
         <button
@@ -150,7 +163,7 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
       </div>
 
       {/* Message Feed */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50/50">
+      <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50/50 scroll-smooth">
         {/* Prompt Suggestions Bar */}
         <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-2xs">
           <div className="text-[11px] font-bold text-slate-500 mb-2 flex items-center gap-1">
@@ -190,7 +203,7 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
                   <div className="w-5 h-5 rounded-full bg-navy-900 flex items-center justify-center text-amber-400">
                     <Bot className="w-3 h-3" />
                   </div>
-                  <span className="text-[11px] font-bold text-navy-900">MPLADS AI</span>
+                  <span className="text-[11px] font-bold text-navy-900">NIRVANA AI</span>
                   <span className="text-[10px] text-slate-400">{m.timestamp}</span>
                 </>
               )}
@@ -236,6 +249,8 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({ isOpen, onClos
             </div>
           </div>
         ))}
+        {/* Scroll anchor */}
+        <div ref={chatBottomRef} />
       </div>
 
       {/* Input Area */}

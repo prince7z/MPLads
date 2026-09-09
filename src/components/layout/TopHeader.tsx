@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Bell, Sparkles, User, ChevronDown } from 'lucide-react';
 import { NotificationPanel } from './NotificationPanel';
 import { ProfileDropdown } from './ProfileDropdown';
@@ -12,46 +11,23 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCopilot }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  const topTabs = [
-    { name: 'Overview', path: '/dashboard' },
-    { name: 'Risk Intelligence', path: '/risk-intelligence' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Financials', path: '/financials' },
-    { name: 'Compliance', path: '/compliance' },
-    { name: 'Reports', path: '/reports' },
-  ];
-
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-20 shadow-2xs">
-      {/* Left Brand */}
-      <div className="flex items-center gap-6">
+      {/* Left Brand Title */}
+      <div className="flex items-center gap-3">
         <div>
-          <h1 className="text-lg font-bold text-navy-900 tracking-tight leading-none flex items-center gap-2">
-            MPLADS AI
-          </h1>
-          <p className="text-[11px] font-medium text-slate-500 mt-0.5">
-            Smart Monitoring & Risk Intelligence
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg font-black text-navy-900 tracking-tight leading-none">
+              NIRVANA
+            </h1>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
+              National Intelligence Portal
+            </span>
+          </div>
+          <p className="text-[11px] font-semibold text-slate-500 mt-1 truncate max-w-[580px]" title="National Intelligence & Risk Visualization for Administrative Network & Assets">
+            National Intelligence & Risk Visualization for Administrative Network & Assets
           </p>
         </div>
-
-        {/* Navigation Tabs */}
-        <nav className="hidden xl:flex items-center gap-1 border-l border-slate-200 pl-6 h-9">
-          {topTabs.map((tab) => (
-            <NavLink
-              key={tab.name}
-              to={tab.path}
-              className={({ isActive }) =>
-                `px-3 py-1.5 text-xs font-semibold rounded transition-colors ${
-                  isActive
-                    ? 'text-navy-900 bg-slate-100 border-b-2 border-navy-900'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                }`
-              }
-            >
-              {tab.name}
-            </NavLink>
-          ))}
-        </nav>
       </div>
 
       {/* Right Controls */}
