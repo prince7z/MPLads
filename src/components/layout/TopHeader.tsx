@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Bell, Sparkles, User, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { NotificationPanel } from './NotificationPanel';
 import { ProfileDropdown } from './ProfileDropdown';
 
@@ -13,22 +14,16 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCopilot }) => {
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-20 shadow-2xs">
-      {/* Left Brand Title */}
-      <div className="flex items-center gap-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-lg font-black text-navy-900 tracking-tight leading-none">
-              NIRVANA
-            </h1>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
-              National Intelligence Portal
-            </span>
-          </div>
-          <p className="text-[11px] font-semibold text-slate-500 mt-1 truncate max-w-[580px]" title="National Intelligence & Risk Visualization for Administrative Network & Assets">
-            National Intelligence & Risk Visualization for Administrative Network & Assets
-          </p>
-        </div>
-      </div>
+      {/* Left Brand Title with Logo & Navbar Name Image */}
+      <Link to="/dashboard" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+  
+        <div className="h-7 w-[1px] bg-slate-200" />
+        <img
+          src="/images/name for navbar.png"
+          alt="NIRVANA - National Intelligence & Risk Visualization"
+          className="h-9 w-auto object-contain shrink-0"
+        />
+      </Link>
 
       {/* Right Controls */}
       <div className="flex items-center gap-3">
@@ -58,7 +53,6 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCopilot }) => {
           onClick={onToggleCopilot}
           className="flex items-center gap-2 border border-navy-900/30 bg-navy-50/50 hover:bg-navy-900 hover:text-white text-navy-900 px-3 py-1.5 rounded-md text-xs font-bold transition-all shadow-xs"
         >
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
           <span>AI Copilot</span>
         </button>
 

@@ -14,35 +14,7 @@ export const DashboardOverviewPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-8 select-none">
       {/* Dashboard Title Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
-        <div>
-          <h1 className="text-xl font-extrabold text-navy-900 tracking-tight flex flex-wrap items-center gap-2">
-            <span>NIRVANA</span>
-            <span className="text-slate-300 font-normal">—</span>
-            <span className="text-base font-semibold text-slate-700">
-              National Intelligence & Risk Visualization for Administrative Network & Assets
-            </span>
-          </h1>
-          <p className="text-xs text-slate-500 font-medium mt-1">
-            Real-time spatial risk intelligence, financial tracking, and predictive monitoring across administrative networks
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3 self-start sm:self-auto shrink-0">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="font-semibold text-slate-500">Financial Year</span>
-            <select
-              value={financialYear}
-              onChange={(e) => setFinancialYear(e.target.value)}
-              className="border border-slate-300 rounded-md px-3 py-1.5 bg-white font-bold text-slate-800 focus:border-navy-900 focus:outline-none shadow-2xs"
-            >
-              <option value="2024-25">2024-25</option>
-              <option value="2023-24">2023-24</option>
-              <option value="2022-23">2022-23</option>
-            </select>
-          </div>
-        </div>
-      </div>
+   
 
       {/* KPI Cards Grid - 6 Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
