@@ -24,11 +24,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
       <div className="flex items-center gap-3 min-w-0">
 
         <Link to="/dashboard" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity min-w-0">
-          <img
-            src="/images/logo.png"
-            alt="eSanchayan Logo"
-            className="h-8 w-auto object-contain shrink-0"
-          />
+
           <div className="h-5 w-[1px] bg-slate-200 shrink-0" />
           <img
             src="/images/name for navbar.png"
