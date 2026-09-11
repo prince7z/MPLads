@@ -42,7 +42,7 @@ flowchart LR
 
 | Resource | Official Link | Description |
 | :--- | :--- | :--- |
-| **Live Web App** | [mplads-ai.vercel.app](https://mplads-ai.vercel.app) | Interactive Government-Enterprise Web Application |
+| **Live Web App** | [mplads-ai.vercel.app](https://mpladss.vercel.app) | Interactive Government-Enterprise Web Application |
 | **YouTube Video Demo** | [Watch Video Demo](https://youtube.com/watch?v=your-demo-id) | End-to-End System Walkthrough |
 | **eSAKSHI Dashboard** | [mplads.mospi.gov.in/digigov](https://mplads.mospi.gov.in/digigov/dashboard.html) | MoSPI eSAKSHI Official Public Dashboard |
 | **MPLADS Official Portal**| [mplads.gov.in](https://www.mplads.gov.in/) | Official Government Source of Record |
