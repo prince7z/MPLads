@@ -1,14 +1,17 @@
 # e-Sanchay | MPLADS AI
 ### *Smart Monitoring & Risk Intelligence Platform for Members of Parliament Local Area Development Scheme (MPLADS)*
 
+**Smart India Hackathon (SIH 2026)** | **Problem Statement ID**: 26102 | **Theme**: Smart Automation | **Category**: Software | **Team**: The Alchemists
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![React](https://img.shields.io/badge/Frontend-React_18-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
+[![Next.js](https://img.shields.io/badge/Framework-Next.js_14-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript_5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Bundler-Vite_6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind_CSS_3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Python](https://img.shields.io/badge/AI_Engine-Python_3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Status](https://img.shields.io/badge/Status-SIH_2026_Locked_Specification-success.svg)]()
-[![Live Dashboard](https://img.shields.io/badge/Live_Dashboard-Deploy_Link-0052CC?style=for-the-badge&logo=vercel&logoColor=white)](https://mplads-ai.vercel.app)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_PostGIS-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![SIH 2026](https://img.shields.io/badge/SIH_2026-Team_The_Alchemists-orange.svg)]()
+[![Live Dashboard](https://img.shields.io/badge/Live_Dashboard-Deploy_Link-0052CC?style=for-the-badge&logo=vercel&logoColor=white)](https://mpladss.vercel.app)
 [![YouTube Demo](https://img.shields.io/badge/YouTube-Video_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=your-demo-id)
 
 ---
@@ -25,49 +28,61 @@ Across India, over **1,05,000+ MPLADS works** are active at any given moment. No
 
 ```mermaid
 flowchart LR
-    A["RISK ANALYSIS"] --> B["EVIDENCE COMPILATION"]
-    B --> C["PREDICTION ENGINE"]
-    C --> D["ALERT GENERATION"]
-    D --> E["INVESTIGATION QUEUE"]
-    E --> F["OFFICER ACTION"]
-    F --> G["AUDIT TRAIL"]
+    A["1. Data Collection<br/>(Government & Projects)"] --> B["2. Data Processing<br/>(Clean & Validate)"]
+    B --> C["3. Evidence Collection<br/>(Photos & GPS)"]
+    C --> D["4. AI Verification<br/>(Compare Data & Detect)"]
+    D --> E["5. Risk Analysis<br/>(Rules & ML Models)"]
+    E --> F["6. Dashboard Review<br/>(Official Review)"]
+    F --> G["7. Action & Update<br/>(Verify & Audit Ledger)"]
 ```
 
 ---
 
-## Quick Links
+## Quick Links & Domain References
 
-| Resource | Link | Description |
+| Resource | Official Link | Description |
 | :--- | :--- | :--- |
-| **Live Dashboard** | [mplads-ai.vercel.app](https://mplads-ai.vercel.app) | Interactive Government-Enterprise Web Application |
-| **YouTube Demo Video** | [Watch Prototype Walkthrough](https://youtube.com/watch?v=your-demo-id) | Complete End-to-End System Demonstration |
-| **MoSPI MPLADS Portal** | [mplads.gov.in](https://mplads.gov.in) | Official Government Source of Record |
-| **eSAKSHI Portal** | [esakshi.mospi.gov.in](https://esakshi.mospi.gov.in) | Official Implementation Platform |
+| **Live Web App** | [mplads-ai.vercel.app](https://mplads-ai.vercel.app) | Interactive Government-Enterprise Web Application |
+| **YouTube Video Demo** | [Watch Video Demo](https://youtube.com/watch?v=your-demo-id) | End-to-End System Walkthrough |
+| **eSAKSHI Dashboard** | [mplads.mospi.gov.in/digigov](https://mplads.mospi.gov.in/digigov/dashboard.html) | MoSPI eSAKSHI Official Public Dashboard |
+| **MPLADS Official Portal**| [mplads.gov.in](https://www.mplads.gov.in/) | Official Government Source of Record |
+| **MoSPI Annual Report** | [mospi.gov.in](https://mospi.gov.in/) | Annual Report on Scheme Implementation |
+| **PIB Updates** | [pib.gov.in](https://pib.gov.in/) | Official Guidelines & Policy Updates |
+| **CAG Audit Reports** | [cag.gov.in](https://cag.gov.in/) | Comptroller & Auditor General MPLADS Audits |
 
 ---
 
 ## Today's Reality & The Problem Statement
 
-Thousands of MPLADS works nationwide are monitored via aggregated summaries, leaving authorities with delayed interventions and manual scanning burdens.
+MPLADS involves large-scale works and fund transactions, making it difficult for authorities to manually detect delays, cost overruns, duplicate works, and unusual fund utilization.
 
 ```mermaid
 flowchart TD
     subgraph Current_Challenges ["Current Challenges in MPLADS Monitoring"]
-        P1["1. Too Many Works to Manually Review<br/>1,05,000+ active works nationwide cannot be manually inspected"]
+        P1["1. High Volume Review Burden<br/>1,05,000+ active works nationwide cannot be manually inspected"]
         P2["2. Fragmented Data Signals<br/>Cost, payment, progress, compliance, and GIS data reside in isolated silos"]
         P3["3. Hidden Deviations<br/>Front-loaded payments and cost overruns masked in aggregate statistics"]
-        P4["4. Reactionary Interventions<br/>Issues investigated only after public failures become visible"]
+        P4["4. Reactionary Audits<br/>Interventions happen only after public failures become visible"]
     end
 ```
 
-### Official Alignment
-The official **eSAKSHI / MPLADS Portal** exposes work recommendations, expenditure, fund releases, status, and GIS locations. However, the **exact granularity of expenditure, milestone execution, and agency performance resides with District Authorities (Nodal Authorities)**. e-Sanchay synthesizes these distributed signals without disturbing current administrative workflows.
+---
+
+## Capability Matrix: e-SAKSHI (Existing) vs. e-Sanchay (Proposed)
+
+| Capability Domain | e-SAKSHI (Existing Platform) | e-Sanchay (Proposed Intelligence Layer) |
+| :--- | :--- | :--- |
+| **Project Management** | Recommends, sanctions, and tracks works transactionally | Uses existing project data to analyze multi-dimensional risks |
+| **Fund Monitoring** | Tracks raw expenditure amounts and payment vouchers | Detects unusual fund utilization patterns & front-loading spikes |
+| **Progress Monitoring** | Captures real-time milestone status entries | Predicts completion delays and cost inflation risk in advance |
+| **Anomaly Detection** | Static data tables and manual report checking | Automated ML-based multi-variable anomaly detection |
+| **Duplicate Works** | Stores basic project titles and descriptions | Semantic similarity (S-BERT) + geospatial radius detection |
+| **Risk Assessment** | Basic status tags (Ongoing, Completed, Delayed) | Dynamic 0 - 100 Unified Risk Index with model confidence % |
+| **Decision Support** | Static reporting dashboards | Explainable alerts + evidence rationale + priority action queue |
 
 ---
 
-## The Solution: One Platform. One Prioritized Pipeline.
-
-e-Sanchay shifts government oversight from **"Monitor Everything"** to **"Investigate What Matters"**.
+## Key Innovations & System Capabilities
 
 ```mermaid
 flowchart LR
@@ -79,41 +94,17 @@ flowchart LR
     end
 ```
 
----
-
-## Key Innovations & Game-Changers
-
-### 1. Unified AI Risk Engine
-Integrates financial velocity, physical progress, spatial similarity, documentation compliance, and historical contractor execution into a standardized **Unified Risk Index (0 - 100)**.
-
-### 2. Contractor / Agency Risk Intelligence (Core Innovation)
-Moves beyond isolated project checks. e-Sanchay constructs a persistent **Historical Risk Profile** per contractor/implementing agency across multiple works:
-* Tracks recurring delay habits, systematic cost overruns, payment timing anomalies, duplicate relationships, and compliance certificate omissions.
-* *Legal Defense Principle*: Always flagged as *"High-risk contractor — historical patterns require enhanced scrutiny,"* never automated accusation.
-
-### 3. Predictive Monitoring
-Forecasts project delays and probability of budget inflation **months before deadlines pass**, evaluating historical velocity vs physical progress curves.
-
-### 4. Explainable AI (XAI with SHAP)
-Eliminates black-box algorithms. Every flagged alert includes an explicit **"Why is this risky?"** panel displaying:
-* Contributing risk weight percentages (e.g., Cost Deviation: +35%, Progress Lag: +28%).
-* Quantitative evidence markers.
-* Model confidence metrics (e.g., *89% Confidence*).
-
-### 5. AI Decision-Support Copilot (Core Innovation)
-An embedded natural language intelligence agent trained strictly on **MPLADS domain guidelines and live dataset context**:
-* Officers ask natural language questions (e.g., *"Why is Project MPL-9281 critical?"*, *"Find potential duplicate works in Patna"*).
-* Generates evidence-backed answers and formats formal **AI Investigation Reports** instantly.
-
-### 6. Duplicate Work Intelligence
-Combines **Sentence-BERT (S-BERT)** semantic description embeddings with **GIS spatial proximity (Haversine/PostGIS)** to highlight potential double-funding or duplicated work recommendations within a geographic radius (e.g., 93% description match, 1.4 km apart).
-
-### 7. Priority Investigation Queue
-Ranks all pending interventions by risk index, confidence, and financial exposure, ensuring district officers focus their limited field teams on top-tier anomalies first.
+1. **Multi-Dimensional AI Analysis**: Combines Financial + Spatial + Temporal + Progress data into a single **Unified Risk Score (0 - 100)**.
+2. **Contractor / Agency Risk Intelligence**: Tracks persistent risk profiles across all works awarded to a single contractor (recurring delays, overruns, duplicate relationships, missing certificates).
+3. **Predictive Monitoring**: Forecasts completion delays and budget overruns months before deadlines expire.
+4. **Explainable AI (XAI with SHAP)**: Every alert features a *"Why is this risky?"* rationale detailing exact factor weights (e.g., Cost Deviation: +35%) and AI confidence levels.
+5. **AI Decision-Support Copilot**: Natural-language decision support assistant trained on MPLADS guidelines for instant Q&A and auto-generating AI Investigation Reports.
+6. **Duplicate Work Detection**: Uses Sentence-BERT (S-BERT) text similarity and PostGIS spatial proximity to flag potential duplicate/similar works within a location radius.
+7. **Priority Investigation Queue**: Sorts all national projects by risk level, financial value, and issue severity to optimize field inspection resources.
 
 ---
 
-## Uniqueness & Strategic Value
+## Strategic Value & Governance Workflow
 
 ```mermaid
 flowchart LR
@@ -131,10 +122,8 @@ flowchart LR
     eSanchay -->|Actionable Evidence| eSAKSHI
 ```
 
-* **Complementary, Not Competitive**: eSAKSHI remains the official transaction platform for work recommendations and fund releases. e-Sanchay acts as an intelligent decision-support layer sitting on top of eSAKSHI data.
-* **Contractor-Level Intelligence**: Identifies systemic risk patterns across all works awarded to a single contractor across districts.
-* **Human-in-the-Loop Governance**: **AI flags, explains, and recommends**; **Authorized Government Officers verify, decide, and act**. AI is a decision support tool, NOT an autonomous agent.
-* **Single Audit Trail**: Maintains end-to-end audit logs of every risk calculation, officer view, verification request, and report export for complete administrative accountability.
+* **Complementary, Not Disruptive**: eSAKSHI remains the official transaction platform. e-Sanchay sits on top as an AI decision-support intelligence layer.
+* **Human-in-the-Loop AI**: AI flags anomalies and explains evidence; authorized government officers verify and take final administrative action.
 
 ---
 
@@ -152,8 +141,6 @@ flowchart TD
 
 ## Multi-Tier Stakeholder Personas
 
-e-Sanchay natively maps onto the four operational tiers of the MPLADS governance structure:
-
 ```mermaid
 flowchart TD
     S1["MINISTRY OF STATISTICS & PROGRAMME IMPLEMENTATION (MoSPI)<br/>National Risk Intelligence, Inter-State Benchmarking & National Reports"] --> S2["STATE NODAL AUTHORITY<br/>State-Level Oversight, District Comparison & Contractor Risk Clusters"]
@@ -170,9 +157,7 @@ flowchart TD
 
 ---
 
-## System Workflow & Technical Architecture (Mermaid)
-
-### End-to-End Technical & Data Architecture
+## System Architecture (Mermaid)
 
 ```mermaid
 flowchart TD
@@ -217,200 +202,154 @@ flowchart TD
     style Officer_Action fill:#16a34a,color:#fff,stroke:#333,stroke-width:2px
 ```
 
-### Human-in-the-Loop Investigation Workflow
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor System as AI Risk Engine
-    actor Queue as Priority Queue
-    actor Officer as District Authority (DM/Officer)
-    actor Field as Field Inspector / Agency
-    actor Audit as Audit Ledger
-
-    System->>Queue: Flag Project (Risk: 89/100, SHAP Rationale + 87% Confidence)
-    Queue->>Officer: Display Top Priority Investigation Card
-    Officer->>Officer: Review Evidence ("Why is this risky?" + Cost/Duplicate breakdown)
-    Officer->>Field: Dispatch Verification Order / Upload Field Evidence
-    Field-->>Officer: Submit Geo-tagged Photo & Physical Inspection Report
-    Officer->>System: Authorize Decision (Approve / Rectify / Escalate)
-    Officer->>Audit: Timestamp & Log Action into Official Audit Trail
-```
-
 ---
 
-## Product Modules Roadmap
+## Core Strengths, Feasibility & Mitigations
 
-e-Sanchay is divided into 10 key enterprise modules:
+### Core Technical Strengths
+* **Scalable Backend**: Built to handle nationwide batch AI processing and indexed spatial search.
+* **Geospatial Intelligence**: PostGIS + Leaflet mapping for regional risk heatmaps and distance radius calculations.
+* **Explainable AI**: SHAP model explanations build trust with government officials.
+* **NLP Transformers**: Sentence Transformers parse project descriptions for semantic similarity.
 
-| # | Module | Core Functionality & Deliverables |
-| :---: | :--- | :--- |
-| **1** | **Overview Dashboard** | National KPI cards, Fund vs Physical completion chart, Risk Distribution donut, State Risk Map, Live AI Insights. |
-| **2** | **Risk Intelligence** | Filterable risk engine views, 4(+1) detection engines, unified scoring, confidence scores, contractor intelligence. |
-| **3** | **Priority Investigation Queue** | Ranked investigation feed by risk level, financial value, issue type, and action urgency. |
-| **4** | **Projects Directory** | Searchable project directory with status tags, financial utilization rates, risk badges, and district filters. |
-| **5** | **Project Investigation (Hero Screen)** | Deep-dive screen displaying Identity, Budget vs Benchmark, Timeline predictions, Duplicate side-by-side comparison, Compliance checklist, and Recommended Action. |
-| **6** | **Financials Module** | Allocation vs Release vs Expenditure analysis, fund utilization speed, payment anomaly flags, district cost benchmarking. |
-| **7** | **Compliance Tracker** | Approval-to-Completion tracking (AS, TS, FS, UC, Completion Certs, Geo-tagged photos) rolled into a Compliance Score. |
-| **8** | **Auto-Generated Reports** | One-click PDF/Excel export of National Risk Intelligence, State Cost Benchmarking, Duplicate Registers, and Delay Forecasts. |
-| **9** | **AI Copilot** | Natural-language decision support drawer with domain context, pre-built query chips, and auto-generated investigation reports. |
-| **10** | **Audit Trail & RBAC** | Role-based navigation (Ministry, State, District, MP) and immutable logging of every risk assessment and officer action. |
-
----
-
-## Unified Risk Scoring System
-
-All signals culminate in a standardized risk scale:
-
-```
-[Level: LOW]        Score: 0 - 30      Normal progress, routine monitoring
-[Level: MEDIUM]     Score: 31 - 50     Minor delay / documentation gap
-[Level: HIGH]       Score: 51 - 70     Cost deviation / Payment anomaly detected
-[Level: CRITICAL]   Score: 71 - 100    High probability delay / Duplicate work candidate / Contractor pattern
-```
-
-> **AI Confidence Score (%)**: Displayed alongside every score to explicitly communicate model certainty (e.g., *Risk 84/100 · 92% Confidence*).
-
----
-
-## Feasibility & Risk Mitigation Matrix
-
-### Feasibility & Mitigations Diagram
+### Challenges & Risk Mitigations
 
 ```mermaid
 flowchart TD
-    subgraph Feasibility ["Feasibility Pillars"]
-        F1["TECHNICAL FEASIBILITY<br/>Built on existing eSAKSHI / MPLADS data schemas; non-disruptive layer"]
-        F2["OPERATIONAL FEASIBILITY<br/>Maps directly to Ministry, State, District, and MP governance roles"]
-        F3["SCALABLE ARCHITECTURE<br/>Batch AI engines + PostGIS spatial indexing handles 1,00,000+ works"]
-    end
-
-    subgraph Mitigations ["Challenges & Risk Mitigations"]
-        C1["Data Quality Gaps"] -->|Automated Validation & Normalization| M1["Scored Confidence Discounting"]
-        C2["False Positives"] -->|Human-in-the-Loop Protocol| M2["Field Verification Before Escalation"]
-        C3["AI Trust Hesitation"] -->|SHAP Rationale & XAI Evidence| M3["Transparent Natural Language Rationale"]
-        C4["System Integration"] -->|RESTful API & CSV/JSON Adapters| M4["Seamless eSAKSHI Integration"]
+    subgraph Mitigations ["Challenges & Mitigations Matrix"]
+        C1["Missing / Inconsistent Data"] -->|Automated Validation Pipelines| M1["Confidence Score Discounting"]
+        C2["False AI Alerts"] -->|Multi-Model + Rule Verification| M2["Human Inspection Before Escalation"]
+        C3["Limited Training Data"] -->|Public Datasets + Synthetic Augmentation| M3["Robust Model Generalization"]
+        C4["Large-Scale Processing"] -->|Modular Microservices Architecture| M4["PostgreSQL + PostGIS Vector Indexing"]
     end
 ```
 
 ---
 
-## Tangible Benefits
+## Impact & Tangible Benefits
 
 ```mermaid
 flowchart TD
     subgraph Benefits ["e-Sanchay Governance Impact"]
-        B1["ADMINISTRATIVE BENEFITS<br/>• Eliminates manual scanning<br/>• Automated priority sorting<br/>• Unified investigation workflow"]
-        B2["FINANCIAL BENEFITS<br/>• Early cost anomaly detection<br/>• Payment pattern monitoring<br/>• Fund utilization supervision"]
-        B3["GOVERNANCE BENEFITS<br/>• Evidence-based decisions<br/>• Explainable AI transparency<br/>• Immutable audit trail"]
+        B1["ADMINISTRATIVE BENEFITS<br/>• Eliminates manual scanning<br/>• Fast priority sorting<br/>• Enables data-driven field inspections"]
+        B2["FUND UTILIZATION BENEFITS<br/>• Early cost anomaly detection<br/>• Payment pattern monitoring<br/>• Identifies potential duplicate works"]
+        B3["CITIZEN & GOVERNANCE BENEFITS<br/>• Better project progress visibility<br/>• Timely corrective actions<br/>• Strengthens public accountability"]
     end
 ```
 
 ---
 
-## Tech Stack & Technical Research Foundation
+## Tech Stack & Research Citations
 
-### Application Technology Stack
+| Domain / Layer | Technologies Used | Purpose |
+| :--- | :--- | :--- |
+| **Frontend Framework** | React 18, Next.js 14, TypeScript | High-density governance web portal |
+| **Styling & Icons** | Tailwind CSS v3, Lucide React | Clean government-enterprise design system |
+| **Charts & Visualization**| Recharts, Custom SVG Gauges | Financial trends, progress curves & risk distributions |
+| **GIS & Spatial Mapping** | Leaflet, D3-Geo, PostGIS | Interactive India state/district risk heatmaps |
+| **Backend Framework** | Python 3.11, FastAPI, Pydantic | Asynchronous REST APIs & data validation schemas |
+| **Data Analytics** | Pandas, NumPy | Time-series data processing & financial velocity calculations |
+| **Database & GIS Engine** | PostgreSQL 16 + PostGIS extension | Spatial indexing, work registers & geospatial radius queries |
+| **Machine Learning** | scikit-learn (*Isolation Forest*), XGBoost | Anomaly detection & delay/cost forecasting |
+| **NLP & Text Similarity** | Sentence Transformers (*S-BERT*) | Semantic text embeddings for duplicate work detection |
+| **Vector Search Indexing** | FAISS, Qdrant | Fast spatial & semantic similarity vector search |
+| **Explainable AI (XAI)** | SHAP (*SHapley Additive exPlanations*) | Feature attribution weights & evidence rationale |
+| **Data Adapters** | REST APIs, CSV / JSON | eSAKSHI data ingestion & export compatibility |
 
-| Layer | Technologies Used |
-| :--- | :--- |
-| **Frontend Framework** | React 18 (TypeScript), Vite 6 |
-| **Styling & UI** | Tailwind CSS v3, Lucide React (Enterprise Outline Icons), Custom CSS Design System |
-| **Data Visualization** | Recharts (Financials & Progress trends), Custom SVG Risk Gauges |
-| **GIS & Mapping** | Leaflet / D3-Geo (Interactive India State & District Risk Maps) |
-| **Routing & State** | React Router v6 |
-| **AI Backend (Engine)** | Python 3.11, FastAPI / PyTorch / Scikit-Learn |
-| **Database & Search** | PostgreSQL 16 + PostGIS (Spatial Analysis), Vector Indexing |
-
-### Scientific & Research Citations
-
-1. **Anomaly Detection**: *Isolation Forest* (Liu, Ting & Zhou - IEEE). Research basis for detecting multi-dimensional financial & progress outliers in large public datasets.
-2. **Explainable AI (XAI)**: *SHAP (SHapley Additive exPlanations)* (Lundberg & Lee - NeurIPS 2017). Framework used for assigning exact quantitative attribution weights to risk factors.
-3. **Semantic Similarity**: *Sentence-BERT (S-BERT)* (Reimers & Gurevych - arXiv). Technical foundation for semantic similarity matching of project titles and work descriptions across nearby coordinates.
+### Technical Citations
+1. **Isolation Forest** (*Liu, Ting & Zhou - IEEE*): Basis for detecting unusual observations in multi-variable datasets.
+2. **SHAP** (*Lundberg & Lee - NeurIPS 2017*): Framework for attributing exact risk feature weights to predictions.
+3. **Sentence-BERT** (*Reimers & Gurevych - arXiv*): Framework for semantic text embeddings to compare work descriptions.
 
 ---
 
-## Project Directory Structure
+## Final Production Monorepo Directory Structure
 
 ```
-mplads-ai/
-├── public/
-│   ├── .htaccess
-│   └── _redirects
-├── src/
-│   ├── components/
-│   │   ├── common/             # Reusable UI cards, metrics, badges & tables
-│   │   ├── copilot/            # AI Copilot Drawer, chat input & sample queries
-│   │   ├── dashboard/          # KPI cards, charts, risk maps & early warnings
-│   │   ├── layout/             # Sidebar, TopHeader & navigation elements
-│   │   ├── project/            # Project investigation components & compliance lists
-│   │   └── risk/               # Risk intelligence filtering & scoring engines
-│   ├── data/
-│   │   └── dashboardData.ts    # Realistic Mock MPLADS Data, Risk Scores & Insights
-│   ├── pages/
-│   │   ├── CompliancePage.tsx
-│   │   ├── DashboardOverviewPage.tsx
-│   │   ├── FinancialsPage.tsx
-│   │   ├── NotFoundPage.tsx
-│   │   ├── ProjectDetailPage.tsx  # Hero Project Investigation Screen
-│   │   ├── ProjectsPage.tsx
-│   │   ├── ReportsPage.tsx
-│   │   └── RiskIntelligencePage.tsx
-│   ├── types/                  # TypeScript Data Schemas & API Contracts
-│   ├── utils/                  # Formatting, Geo-calculations & Risk Helpers
-│   ├── App.tsx                 # Core Route Configuration & Layout Shell
-│   ├── main.tsx                # Entry point
-│   └── index.css               # Design Tokens & Utilities
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── vercel.json
-└── vite.config.ts
+e-sanchay/
+├── apps/
+│   ├── web/                            # Enterprise React / Next.js / TypeScript Governance Web Portal
+│   │   ├── public/
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   │   ├── common/             # Reusable UI cards, metrics, badges & design system tokens
+│   │   │   │   ├── copilot/            # AI Copilot Drawer, chat input UI & pre-built query chips
+│   │   │   │   ├── dashboard/          # KPI cards, Recharts, India Risk Map & Early Warnings
+│   │   │   │   ├── layout/             # Responsive Sidebar, TopHeader & Navigation Shell
+│   │   │   │   ├── project/            # Project Detail, Timeline predictions & Compliance checklist
+│   │   │   │   └── risk/               # Risk Intelligence filters & Contractor Risk profilers
+│   │   │   ├── data/                   # Standardized mock data & local fallbacks
+│   │   │   ├── hooks/                  # Custom React hooks (useRiskEngine, useCopilot, useAuth)
+│   │   │   ├── pages/                  # Route views (Overview, Risk, Projects, Financials, etc.)
+│   │   │   ├── services/               # REST API Client Services (Axios / Fetch)
+│   │   │   ├── types/                  # Shared TypeScript interfaces & DTO schemas
+│   │   │   └── utils/                  # Formatting, GIS distance math & risk helper functions
+│   │   ├── package.json
+│   │   ├── tailwind.config.js
+│   │   └── vite.config.ts / next.config.js
+│   │
+│   └── mobile/                         # Ground Field Inspector App (React Native / PWA)
+│       └── ...
+│
+├── services/
+│   ├── api-gateway/                    # REST API Gateway & Authentication Microservice
+│   │   ├── app/
+│   │   │   ├── api/v1/                 # Endpoints (Projects, Contractors, Risk Scores, Alerts)
+│   │   │   ├── core/                   # Security, JWT, RBAC Middleware, Rate Limiting
+│   │   │   └── schemas/                # Pydantic data validation schemas
+│   │   └── main.py                     # FastAPI application entrypoint
+│   │
+│   ├── ai-engine/                      # Core AI / ML Intelligence Microservice
+│   │   ├── models/
+│   │   │   ├── anomaly/                # scikit-learn (Isolation Forest) cost & payment anomaly engines
+│   │   │   ├── duplicate/              # Sentence Transformers (S-BERT) text embedding generators
+│   │   │   ├── forecast/               # XGBoost delay prediction & cost overrun models
+│   │   │   └── contractor/             # Historical contractor/agency risk profiler
+│   │   ├── explainability/             # SHAP attribution engine & evidence rationale generators
+│   │   ├── vector_search/              # FAISS / Qdrant spatial & semantic similarity indexers
+│   │   ├── pipelines/                  # Pandas & NumPy data processing & feature engineering
+│   │   ├── config.py
+│   │   └── service.py                  # FastAPI microservice runner
+│   │
+│   ├── copilot-service/                # AI Decision-Support Copilot Microservice
+│   │   ├── knowledge_base/             # MPLADS official guidelines, MoSPI circulars & domain rules
+│   │   ├── rag_engine.py               # Domain RAG Q&A generator over live dataset context
+│   │   └── report_generator.py         # Automated AI Investigation Report generator
+│   │
+│   └── data-pipeline/                  # Data Extraction, ETL & GIS Normalization Service
+│       ├── etl/                        # Scrapers & eSAKSHI REST/CSV API adapters
+│       ├── geocoding/                  # GIS coordinate normalization & spatial radius tagging
+│       └── tasks/                      # Celery / Airflow batch processing pipelines
+│
+├── database/                           # PostgreSQL + PostGIS Schemas & Migration Engine
+│   ├── migrations/                     # Alembic database migration scripts
+│   ├── schema/
+│   │   ├── 01_mplads_core.sql          # Works, Sanctions, Expenditure, Contractors
+│   │   ├── 02_gis_spatial.sql           # PostGIS spatial geometry, coordinates & radii
+│   │   ├── 03_risk_scores.sql          # Unified risk indices, SHAP weights & alerts
+│   │   └── 04_audit_ledger.sql         # Immutable officer action audit logs
+│   └── seeds/                          # Production sample datasets & test fixtures
+│
+├── docker/                             # Enterprise Containerization & Deployment Orchestration
+│   ├── docker-compose.yml              # Multi-container orchestration (Web, Gateway, AI Engine, Postgres, Qdrant)
+│   ├── Dockerfile.web
+│   ├── Dockerfile.api
+│   └── Dockerfile.ai
+│
+├── docs/                               # System Specifications & Architecture Documentation
+│   ├── api_spec.yaml                   # OpenAPI / Swagger 3.0 specification
+│   ├── architecture_diagrams/
+│   └── SIH_Product_Spec.pdf
+│
+├── .gitignore
+├── README.md
+└── LICENSE
 ```
 
 ---
+ 
 
-## Local Setup & Installation
-
-### Prerequisites
-* **Node.js**: v18.0.0 or higher
-* **npm**: v9.0.0 or higher
-
-### Steps
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/prince7z/MPLads.git
-   cd MPLads
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start Local Development Server**
-   ```bash
-   npm run dev
-   ```
-   Open your browser and navigate to `http://localhost:5173`
-
-4. **Build for Production**
-   ```bash
-   npm run build
-   ```
-
-5. **Preview Production Build**
-   ```bash
-   npm run preview
-   ```
-
----
-
-## Summary Demo Walkthrough
-
-When presenting e-Sanchay / MPLADS AI, follow this recommended presentation sequence:
+## Presentation Sequence
 
 ```mermaid
 flowchart LR
@@ -426,14 +365,6 @@ flowchart LR
 
 ---
 
-## Acknowledgements & References
-
-* **Ministry of Statistics and Programme Implementation (MoSPI)**: Guidelines on Members of Parliament Local Area Development Scheme (MPLADS).
-* **Official Portals**: [MPLADS DigiGov Portal](https://mplads.gov.in) & [eSAKSHI Portal](https://esakshi.mospi.gov.in).
-* **Smart India Hackathon (SIH 2026)**: Developed as a comprehensive product specification and prototype for national implementation monitoring.
-
----
-
 <div align="center">
-  <sub>Built for Transparent, Efficient, and Accountable Public Governance in India.</sub>
+  <sub>Developed by <b>Team The Alchemists</b> for Smart India Hackathon (SIH 2026).</sub>
 </div>
