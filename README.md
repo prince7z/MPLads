@@ -12,7 +12,7 @@
 [![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL_PostGIS-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![SIH 2026](https://img.shields.io/badge/SIH_2026-Team_The_Alchemists-orange.svg)]()
 [![Live Dashboard](https://img.shields.io/badge/Live_Dashboard-Deploy_Link-0052CC?style=for-the-badge&logo=vercel&logoColor=white)](https://mpladss.vercel.app)
-[![YouTube Demo](https://img.shields.io/badge/YouTube-Video_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=your-demo-id)
+[![YouTube Demo](https://img.shields.io/badge/YouTube-Video_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/TIc5qm7jIU4?is=p3Nt9OzcXNCS37f9)
 
 ---
 
