@@ -1,4 +1,4 @@
-# e-Sanchay | MPLADS AI
+# e-Sanchayan | MPLADS AI
 ### *Smart Monitoring & Risk Intelligence Platform for Members of Parliament Local Area Development Scheme (MPLADS)*
 
 **Smart India Hackathon (SIH 2026)** | **Problem Statement ID**: 26102 | **Theme**: Smart Automation | **Category**: Software | **Team**: The Alchemists
@@ -22,9 +22,9 @@
 
 ## Executive Summary
 
-**e-Sanchay (MPLADS AI)** is an enterprise-grade AI-powered monitoring, risk intelligence, and decision-support platform engineered for the **Ministry of Statistics and Programme Implementation (MoSPI), Government of India**.
+**e-Sanchayan (MPLADS AI)** is an enterprise-grade AI-powered monitoring, risk intelligence, and decision-support platform engineered for the **Ministry of Statistics and Programme Implementation (MoSPI), Government of India**.
 
-Across India, over **1,05,000+ MPLADS works** are active at any given moment. No government authority can manually inspect every work. **e-Sanchay** converts raw, fragmented signals (project progress, fund releases, payment timing, compliance documentation, geo-location, contractor history) into a **single prioritized, explainable action pipeline**.
+Across India, over **1,05,000+ MPLADS works** are active at any given moment. No government authority can manually inspect every work. **e-Sanchayan** converts raw, fragmented signals (project progress, fund releases, payment timing, compliance documentation, geo-location, contractor history) into a **single prioritized, explainable action pipeline**.
 
 ```mermaid
 flowchart LR
@@ -68,9 +68,9 @@ flowchart TD
 
 ---
 
-## Capability Matrix: e-SAKSHI (Existing) vs. e-Sanchay (Proposed)
+## Capability Matrix: e-SAKSHI (Existing) vs. e-Sanchayan (Proposed)
 
-| Capability Domain | e-SAKSHI (Existing Platform) | e-Sanchay (Proposed Intelligence Layer) |
+| Capability Domain | e-SAKSHI (Existing Platform) | e-Sanchayan (Proposed Intelligence Layer) |
 | :--- | :--- | :--- |
 | **Project Management** | Recommends, sanctions, and tracks works transactionally | Uses existing project data to analyze multi-dimensional risks |
 | **Fund Monitoring** | Tracks raw expenditure amounts and payment vouchers | Detects unusual fund utilization patterns & front-loading spikes |
@@ -113,16 +113,16 @@ flowchart LR
         E2 --> E3["Fund Disbursal & Payments"]
     end
 
-    subgraph eSanchay ["e-Sanchay Intelligence Layer"]
+    subgraph eSanchayan ["e-Sanchayan Intelligence Layer"]
         P1["Data Extraction & Normalization"] --> P2["AI Anomaly & Risk Engine"]
         P2 --> P3["Decision Support & Priority Queue"]
     end
 
-    eSAKSHI -->|Raw Signals| eSanchay
-    eSanchay -->|Actionable Evidence| eSAKSHI
+    eSAKSHI -->|Raw Signals| eSanchayan
+    eSanchayan -->|Actionable Evidence| eSAKSHI
 ```
 
-* **Complementary, Not Disruptive**: eSAKSHI remains the official transaction platform. e-Sanchay sits on top as an AI decision-support intelligence layer.
+* **Complementary, Not Disruptive**: eSAKSHI remains the official transaction platform. e-Sanchayan sits on top as an AI decision-support intelligence layer.
 * **Human-in-the-Loop AI**: AI flags anomalies and explains evidence; authorized government officers verify and take final administrative action.
 
 ---
@@ -230,7 +230,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Benefits ["e-Sanchay Governance Impact"]
+    subgraph Benefits ["e-Sanchayan Governance Impact"]
         B1["ADMINISTRATIVE BENEFITS<br/>• Eliminates manual scanning<br/>• Fast priority sorting<br/>• Enables data-driven field inspections"]
         B2["FUND UTILIZATION BENEFITS<br/>• Early cost anomaly detection<br/>• Payment pattern monitoring<br/>• Identifies potential duplicate works"]
         B3["CITIZEN & GOVERNANCE BENEFITS<br/>• Better project progress visibility<br/>• Timely corrective actions<br/>• Strengthens public accountability"]
@@ -266,7 +266,7 @@ flowchart TD
 ## Final Production Monorepo Directory Structure
 
 ```
-e-sanchay/
+e-sanchayan/
 ├── apps/
 │   ├── web/                            # Enterprise React / Next.js / TypeScript Governance Web Portal
 │   │   ├── public/
