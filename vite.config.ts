@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: false
-  }
+    open: false,
+    proxy: {
+      '/api': {
+        target: 'https://api.empoweredindian.in',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 });

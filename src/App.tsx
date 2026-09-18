@@ -10,6 +10,8 @@ import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { FinancialsPage } from './pages/FinancialsPage';
 import { CompliancePage } from './pages/CompliancePage';
 import { ReportsPage } from './pages/ReportsPage';
+import { StateDashboardPage } from './pages/StateDashboardPage';
+import { MPDashboardPage } from './pages/MPDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => {
@@ -45,6 +47,9 @@ export const App: React.FC = () => {
             <Route path="/risk-intelligence" element={<RiskIntelligencePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectDetailPage />} />
+            <Route path="/mplads/track-area" element={<ProjectsPage />} />
+            <Route path="/mplads/states/:state" element={<StateDashboardPage />} />
+            <Route path="/mplads/mps/:id" element={<MPDashboardPage />} />
             <Route path="/financials" element={<FinancialsPage />} />
             <Route path="/compliance" element={<CompliancePage />} />
             <Route path="/reports" element={<ReportsPage />} />
